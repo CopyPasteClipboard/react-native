@@ -1,31 +1,30 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React from 'react';
 import { Platform, StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
-
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
 
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
+      <View style={{flex: 1}}>
+        <View style={{ backgroundColor: 'white', height: 44, justifyContent: 'center', alignItems: 'center', elevation: 3 }}>
+          <Text style={{ fontWeight: 'bold', fontSize: 18 }}>Clippy</Text>
+        </View>
         <Text style={styles.welcome}>Welcome to Clippy! Paste some text</Text>
-        <View flex={1} flexDirection='column'>
-        <TextInput style={{elevation: 3, backgroundColor: 'white'}}></TextInput>
-        <TouchableOpacity style= {{elevation: 3, borderColor: 'gray'}}>
-          <Text>Paste</Text>
-        </TouchableOpacity>
+        <View flex={1}>
+          <View flexDirection='row'>
+            <TextInput 
+            style={{ elevation: 3, 
+            backgroundColor: 'white', 
+            flex: 1,
+             margin: 24, 
+             borderRadius: 10,
+            paddingHorizontal: 12 }}
+             placeholderTextColor='grey'
+             placeholder='Content'
+             ></TextInput>
+          </View>
+          <TouchableOpacity style={{ elevation: 3, borderColor: 'gray', margin: 24, paddingVertical: 12, alignItems: 'center', borderRadius: 10 }}>
+            <Text>Paste</Text>
+          </TouchableOpacity>
         </View>
       </View>
     );
