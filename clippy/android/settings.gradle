@@ -1,0 +1,3 @@
+rootProject.name = 'clippy'
+
+include ':app'
