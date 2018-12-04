@@ -6,7 +6,7 @@
 
 export default class Requests {
 
-    static baseURL = "http://34.224.86.78:8080/"
+    static baseURL = "http://54.162.248.95:4000/"
 
     static httpPOSTRequest(url, httpBody) {
         console.log('post request at:', url)

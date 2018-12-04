@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Platform, StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
-import Requests from './requests';
+import Requests from './Requests/requests';
 
 
 export default class MainView extends React.Component {
@@ -14,16 +14,18 @@ export default class MainView extends React.Component {
           recentContent: null,
           pasteText: null
         }
+
+        this.refreshContent();
       }
     
     
       render() {
         return (
           <View style={{ flex: 1 }}>
-            <View style={{ backgroundColor: 'white', height: 44, justifyContent: 'center', alignItems: 'center', elevation: 3 }}>
-              <Text style={{ fontWeight: 'bold', fontSize: 18 }}>Clippy</Text>
+            <View style={{ backgroundColor: '#fed330', justifyContent: 'center', alignItems: 'center', elevation: 3 }}>
+              <Text style={{fontFamily: 'Montserrat-ExtraBold', fontSize: 24, paddingVertical: 12 }}>Clippy</Text>
             </View>
-            <Text style={styles.welcome}>Welcome to Clippy! Paste some text</Text>
+            <Text style={[styles.welcome, {fontFamily: 'Montserrat-Bold', fontSize: 14, paddingVertical: 16}]}>Welcome to Clippy! Paste some text</Text>
             <View flex={1}>
               <View flexDirection='row'>
                 <TextInput
@@ -31,9 +33,11 @@ export default class MainView extends React.Component {
                     elevation: 3,
                     backgroundColor: 'white',
                     flex: 1,
-                    margin: 24,
-                    borderRadius: 10,
-                    paddingHorizontal: 12
+                    margin: 4,
+                    marginHorizontal: 24,
+                    borderRadius: 5,
+                    paddingHorizontal: 12,
+                    height: 44
                   }}
                   value={this.state.pasteText}
                   onChangeText={(text) => this.setState({ pasteText: text })}
@@ -43,17 +47,17 @@ export default class MainView extends React.Component {
               </View>
               <TouchableOpacity
                 onPress={() => { this.saveContent(this.state.pasteText) }}
-                style={{ elevation: 3, borderColor: 'gray', backgroundColor: 'white', margin: 24, paddingVertical: 12, alignItems: 'center', borderRadius: 10 }}>
-                <Text>Paste</Text>
+                style={{ elevation: 3, borderColor: 'gray', backgroundColor: '#4b6584', margin: 16, marginHorizontal: 24, paddingVertical: 12, alignItems: 'center', borderRadius: 5, marginBottom: 48 }}>
+                <Text style={{color: 'white', fontWeight: 'bold', fontSize: 15}}>Paste</Text>
               </TouchableOpacity>
-              <View elevation={3} backgroundColor='white' alignItems='center' style={{ borderRadius: 5, marginHorizontal: 24 }}>
-                <Text style={{ fontSize: 17, marginVertical: 8, fontWeight: 'bold' }}>Current Content</Text>
-                <Text style={{ marginVertical: 8 }}>{this.state.recentContent === null ? "No recent items. (try refreshing)" : this.state.recentContent.text_content}</Text>
+              <View elevation={3} backgroundColor='white' alignItems='center' style={{ borderRadius: 5, marginHorizontal: 24, paddingHorizontal: 8}}>
+                <Text style={{ fontSize: 17, marginVertical: 8, fontWeight: 'bold', borderBottomWidth: 1 }}>Current Content</Text>
+                <Text style={{ marginVertical: 8, fontSize: 15, alignContent: 'center', textAlign: 'center' }}>{this.state.recentContent === null ? "No recent items. (try refreshing)" : this.state.recentContent.text_content}</Text>
               </View>
               <TouchableOpacity
                 onPress={() => { this.refreshContent() }}
-                style={{ elevation: 3, borderColor: 'gray', margin: 24, backgroundColor: 'white', paddingVertical: 12, alignItems: 'center', borderRadius: 10 }}>
-                <Text>Refresh</Text>
+                style={{ elevation: 3, borderColor: 'gray', margin: 24, backgroundColor: '#4b6584', paddingVertical: 12, alignItems: 'center', borderRadius: 5 }}>
+                <Text style={{color: 'white', fontWeight: 'bold', fontSize: 15}}>Refresh</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -62,13 +66,13 @@ export default class MainView extends React.Component {
     
     
       refreshContent() {
-        Requests.httpGETRequest('v1/clipboard/0').then(response => {
+        Requests.httpGETRequest('v1/clipboard/1?type=most_recent').then(response => {
           this.setState({ recentContent: response[0] })
         })
       }
     
       saveContent(text) {
-        Requests.httpPOSTRequest('v1/clipboard/0/boarditem', JSON.stringify({ new_item: text }))
+        Requests.httpPOSTRequest('v1/clipboard/1/boarditem', JSON.stringify({ board_item: text }))
           .then(response => {
             console.log(response);
           })
@@ -87,7 +91,7 @@ export default class MainView extends React.Component {
       welcome: {
         fontSize: 20,
         textAlign: 'center',
-        margin: 10,
+        margin: 8,
       },
       instructions: {
         textAlign: 'center',
