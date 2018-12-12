@@ -8,6 +8,7 @@ export default class LogInView extends React.Component {
     constructor(props) {
         super(props)
 
+        //Initialize the state
         this.state = {
             username: ""
         }
@@ -48,7 +49,7 @@ export default class LogInView extends React.Component {
         
     }
 
-
+    //Render UI components
     render() {
         return <View backgroundColor='white' alignItems='center' justifyContent='center' flex={1}>
             <Text style={{ fontSize: 40, fontWeight: 'bold', marginVertical: 16 }}>Clippy</Text>

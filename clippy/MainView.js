@@ -10,6 +10,7 @@ export default class MainView extends React.Component {
 	constructor(props) {
 		super(props)
 
+		//Initialize the state
 		this.state = {
 			recentContent: null,
 			pasteText: null,
@@ -17,6 +18,7 @@ export default class MainView extends React.Component {
 			activeBoard: null
 		}
 
+		//Load in the boards so we can show recent content asap
 		this.refreshBoards();
 	}
 
@@ -24,6 +26,7 @@ export default class MainView extends React.Component {
 	refreshContent() {
 		if (this.state.activeBoard == null) return
 
+		//Get the most recent item and update the UI
 		Board.getMostRecentBoardItem(this.state.activeBoard.id)
 			.then(response => {
 				this.setState({ recentContent: response[0] })
@@ -35,6 +38,7 @@ export default class MainView extends React.Component {
 	refreshBoards() {
 		User.getUserBoards()
 			.then(response => {
+				//Update state only if response has boards
 				if (response.length != 0) {
 					this.state.activeBoard = response[0]
 					this.setState({ boards: response})
@@ -47,8 +51,11 @@ export default class MainView extends React.Component {
 	//Save content to API
 	saveContent(text) {
 		Keyboard.dismiss()
+
+		//Make sure we have a board to use for the request. otherwise the boards havent loaded and we should abort.
 		if (this.state.activeBoard == null) return
 
+		//Send the request and model UI accordingly
 		Board.saveBoardItem(this.state.activeBoard.id, text)
 			.then(response => {
 				console.log(response);

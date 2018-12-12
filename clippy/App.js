@@ -16,6 +16,7 @@ export default class App extends React.Component {
   }
   
 }
+//Create a switch navigator to allow the user to see different pages.
 const MainNavigator = createSwitchNavigator({
   Main: MainView,
   SignUp: SignUpView,

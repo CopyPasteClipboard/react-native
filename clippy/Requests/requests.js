@@ -6,10 +6,13 @@
 
 export default class Requests {
 
-    static baseURL = "http://10.67.105.91:4000"//"http://54.162.248.95:4000"//
+    //Base url for current ENV
+    static baseURL = "http://54.162.248.95:4000"//"http://10.67.105.91:4000"//
 
+    //Basic network error string
     static NETWORK_ERROR = "Unable to perform request"
 
+    //Post request helper func
     static httpPOSTRequest(url, httpBody) {
         console.log('post request at:', this.baseURL + url)
 
@@ -39,6 +42,7 @@ export default class Requests {
             )
     };
 
+    //GET request helper func
     static httpGETRequest(url) {
         console.log('get request at', this.baseURL + url)
         return fetch(this.baseURL + url, {

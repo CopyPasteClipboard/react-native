@@ -1,12 +1,12 @@
 import Requests from "./requests";
 
 
-
-
-
 export default class User {
 
+    //The current logged in user.
     static user = null
+
+    //User related API methods.
 
     static getUserByUsername(username) {
         return Requests.httpPOSTRequest('/v1/login', JSON.stringify({ username: username }))

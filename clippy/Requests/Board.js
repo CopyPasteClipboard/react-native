@@ -1,14 +1,10 @@
 import Requests from "./requests";
 
 
-
-
-
-
 export default class Board {
     
-
-
+    //Board related API requests
+    
     static getMostRecentBoardItem(board_id) {
         return Requests.httpGETRequest('/v1/clipboard/' + board_id + '?type=most_recent')
     }
