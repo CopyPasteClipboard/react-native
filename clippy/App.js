@@ -2,6 +2,7 @@ import React from 'react';
 import { createSwitchNavigator } from 'react-navigation';
 import MainView from './MainView'
 import SignUpView from './SignUpView';
+import LogInView from './LogInView';
 
 export default class App extends React.Component {
 
@@ -17,6 +18,7 @@ export default class App extends React.Component {
 }
 const MainNavigator = createSwitchNavigator({
   Main: MainView,
-  SignUp: SignUpView
+  SignUp: SignUpView,
+  LogIn: LogInView
 },
-{initialRouteName: 'SignUp'});
+{initialRouteName: 'LogIn'});

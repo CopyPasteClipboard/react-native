@@ -6,10 +6,12 @@
 
 export default class Requests {
 
-    static baseURL = "http://54.162.248.95:4000/"
+    static baseURL = "http://10.67.105.91:4000"//"http://54.162.248.95:4000"//
+
+    static NETWORK_ERROR = "Unable to perform request"
 
     static httpPOSTRequest(url, httpBody) {
-        console.log('post request at:', url)
+        console.log('post request at:', this.baseURL + url)
 
         let request = {
             method: 'POST',
@@ -38,7 +40,7 @@ export default class Requests {
     };
 
     static httpGETRequest(url) {
-        console.log('get request at', url)
+        console.log('get request at', this.baseURL + url)
         return fetch(this.baseURL + url, {
             method: 'GET',
             headers: {
