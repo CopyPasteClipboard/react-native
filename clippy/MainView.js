@@ -1,14 +1,11 @@
 
 import React from 'react';
-import { Platform, StyleSheet, Text, View, TouchableOpacity, TextInput, AsyncStorage, Keyboard } from 'react-native';
-import Requests from './Requests/requests';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, AsyncStorage, Keyboard } from 'react-native';
 import User from './Requests/User';
 import Board from './Requests/Board';
-import { Dropdown } from 'react-native-material-dropdown';
 
 
 export default class MainView extends React.Component {
-
 
 	constructor(props) {
 		super(props)
